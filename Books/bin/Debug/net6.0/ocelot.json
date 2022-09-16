@@ -1,0 +1,71 @@
+﻿{
+  "Routes": [
+    {
+      //https://localhost:7154/Login
+      "DownstreamPathTemplate": "/Login",
+      "DownstreamScheme": "https",
+      "downstreamHttpMethod": "Post",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7065"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/Login",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      //https://localhost:7183/api/BookMasters/SearchBook?title=Book2&authorID=1&publisher=Test&publishedDate=2022-09-02
+      "DownstreamPathTemplate": "/api/BookMasters/SearchBook?title={t}&authorID={aID}&publisher={p}&publishedDate={pDate}",
+      "DownstreamScheme": "https",
+      "downstreamHttpMethod": "Get",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7183"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/SearchBook/{t}/{aID}/{p}/{pDate}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      //https://localhost:7183/api/RoleMasters
+      "DownstreamPathTemplate": "/api/RoleMasters",
+      "DownstreamScheme": "https",
+      "downstreamHttpMethod": "GET",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7183"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/Roles/RolesList",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      //https://localhost:7183/api/BookMasters/id
+      "DownstreamPathTemplate": "/api/BookMasters/{id}",
+      "DownstreamScheme": "https",
+      "downstreamHttpMethod": "Put",
+      "RouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7183"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/books/Update/{id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7183/"
+  }
+}

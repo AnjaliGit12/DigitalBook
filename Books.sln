@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books", "Books\Books.csproj", "{636D834E-7DC5-48C9-8F1F-BC0F1F73F27F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{002E65F6-16E8-4587-B7D8-FFF0875BBA55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{636D834E-7DC5-48C9-8F1F-BC0F1F73F27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{636D834E-7DC5-48C9-8F1F-BC0F1F73F27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{636D834E-7DC5-48C9-8F1F-BC0F1F73F27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{636D834E-7DC5-48C9-8F1F-BC0F1F73F27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002E65F6-16E8-4587-B7D8-FFF0875BBA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002E65F6-16E8-4587-B7D8-FFF0875BBA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002E65F6-16E8-4587-B7D8-FFF0875BBA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002E65F6-16E8-4587-B7D8-FFF0875BBA55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B40214AA-95DE-40A5-A5E6-74881F80867E}
+	EndGlobalSection
+EndGlobal
