@@ -146,8 +146,51 @@ namespace AuthService.Controllers
             }
 
             lsBookHistory = (from purchase in _context.Purchases
+                             join UserTable in _context.UserTables on purchase.EmailId equals UserTable.EmailId
                              join book in _context.Books on purchase.BookId equals book.BookId
+                             join aut in _context.UserTables on book.UserId  equals aut.UserId
+                             join cat in _context.Categories on book.CategoryId equals cat.CategoryId   
                              where purchase.EmailId == EmailId && book.Active == true
+                             select new
+                             {
+                                 purchaseId = purchase.PurchaseId,
+                                 bookId = book.BookId,
+                                 bookName = book.BookName,
+                                 price = book.Price,
+                                 author = book.author,
+                                 publisher = book.Publisher,
+                                 category = cat.CategoryName,
+                                 username=UserTable.UserName,
+                                 content = book.Content
+                                 
+                             }).ToList()
+                     .Select(x => new Book()
+                     {
+                         BookId = x.bookId,
+                         BookName = x.bookName,
+                         Price=x.price,
+                         Publisher =x.publisher,
+                         author =x.author,
+                         Content=x.content
+
+                     }).ToList();
+
+            return lsBookHistory;
+        }
+        // Get All Books With Status Purchase or not
+        [HttpGet]
+        [Route("GetBooksWithStatus")]
+        public List<Book> GetBooksWithStatus(int EmailId)
+        {
+            List<Book> lsBookHistory = new List<Book>();
+            if (_context.Purchases == null)
+            {
+                return lsBookHistory;
+            }
+
+
+            lsBookHistory = (from purchase in _context.Purchases
+                             join book in _context.Books on purchase.BookId equals book.BookId
                              select new
                              {
                                  purchaseId = purchase.PurchaseId,
@@ -159,57 +202,7 @@ namespace AuthService.Controllers
                          BookId = x.bookId,
                          BookName = x.bookName
                      }).ToList();
-
-            return lsBookHistory;
-        }
-        // Get All Books With Status Purchase or not
-        [HttpGet]
-        [Route("GetBooksWithStatus")]
-        public List<BookMasterViewModel> GetBooksWithStatus(string EmailId)
-        {
-            List<BookMasterViewModel> lsBookHistory = new List<BookMasterViewModel>();
-            if (_context.Purchases == null)
-            {
-                return lsBookHistory;
-            }
-
-
-            lsBookHistory = (from book in _context.Books
-                             join user in _context.UserTables
-                             on book.UserId equals user.UserId
-                             join category in _context.Categories
-                             on book.CategoryId equals category.CategoryId
-                             join purchase in _context.Purchases
-                  on book.BookId equals purchase.BookId
-                  into BookPurchaseGroup
-                             from pur in BookPurchaseGroup.DefaultIfEmpty()
-                             select new
-                             {
-                                 purchaseId = pur.PurchaseId == null ? 0 : pur.PurchaseId,
-                                 bookId = book.BookId,
-                                 Title = book.BookName,
-                                 Author = user.FirstName + " " + user.LastName,
-                                 Publisher = book.Publisher,
-                                 Price = book.Price,
-                                 PublishedDate = book.PublishedDate,
-                                 CategoryName = category.CategoryName,
-                                 Email = pur.EmailId == null ? "NA" : pur.EmailId,
-                                 BookContent = book.Content,
-                                 Active = book.Active
-                             }).ToList()
-            .Select(x => new BookMasterViewModel()
-            {
-                BookId = x.bookId,
-                Title = x.Title,
-                Publisher = x.Publisher,
-                Price = (double)(decimal?)Convert.ToDouble(x.Price),
-                PublishedDate = (DateTime)x.PublishedDate,
-                Email = x.Email,
-                BookContent = x.BookContent,
-                Active = (bool)x.Active
-            }).ToList();
-
-            lsBookHistory = lsBookHistory.Where(x => x.Email == EmailId || x.Email == "NA").ToList();
+            lsBookHistory = lsBookHistory.Where(x => x.UserId == EmailId).ToList();
 
             return lsBookHistory;
         }

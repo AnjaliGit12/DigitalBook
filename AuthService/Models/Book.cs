@@ -5,6 +5,10 @@ namespace AuthService.Models
 {
     public partial class Book
     {
+        internal string author;
+        internal string Author;
+        internal string CategoryName;
+
         public Book()
         {
             Purchases = new HashSet<Purchase>();
@@ -18,7 +22,7 @@ namespace AuthService.Models
         public int? UserId { get; set; }
         public DateTime? PublishedDate { get; set; }
         public string? Content { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? Createdby { get; set; }
         public DateTime? ModifiedDate { get; set; }
@@ -27,5 +31,9 @@ namespace AuthService.Models
         public virtual Category? Category { get; set; }
         public virtual UserTable? User { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
+        //internal string? Categoryname;
+        //internal string? Purchasedby;
+        //internal string Author;
+        //internal string CategoryName;
     }
 }
